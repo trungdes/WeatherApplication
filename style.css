@@ -17,21 +17,23 @@ body{
     background: var(--primary-clr);
     transition: background-image 0.3s ease;
     background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
-    url("blue.jpg");
+    url("./img/blue.jpg");
 }
 img{
     width: 100%;
 }
 .wrapper{
     display: flex;
-    width: 1200px;
-    min-width: 900px;
-    border-radius: 20px;
+    width: 15vw;
+    /* min-width: 900px; */
+    border-top-left-radius: 20px;
+    border-bottom-left-radius: 20px;
     overflow: hidden;
+    margin-left: 10vw;
 }
 .sidebar{
-    width: 30%;
-    min-width: 250px;
+    width: 15vw;
+    /* min-width: 250px; */
     padding: 20px;
     display: flex;
     flex-direction: column;
@@ -47,7 +49,7 @@ img{
     position: relative;
 }
 .search input{
-    width: 100px;
+    width: 90%;
     height: 40px;
     border: 1px solid #ced4da;
     border-top-left-radius: 4px;
@@ -72,8 +74,9 @@ img{
     cursor: pointer;
 }
 .weather-icon{
-    width: 50%;
-    height: 15px;
+    position: relative;
+    width: 80%;
+    height: 10vh;
     text-align: center;
     margin-top: 20px;
     margin-bottom: 100px;
@@ -121,12 +124,15 @@ img{
     margin-top: 10px;
 }
 .main{
-    width: 100%;
+    width: 80%;
     min-width: 400px;
     padding: 20px 40px;
     position: relative;
     padding-bottom: 90px;
+    margin-right: 10vw;
     background-color: #f6f6f8;
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
 }
 .main nav{
     display: flex;
@@ -157,9 +163,9 @@ nav .units button{
     color: #1a1a1a;
     background-color: #fff;
 }
-.units button.active{
+.options .units button.active{
     color: #fff;
-    bacground-color: #1a1a1a;
+    background-color: #1a1a1a;
 }
 .main .cards{
     display: flex;
