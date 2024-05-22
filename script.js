@@ -26,8 +26,8 @@ const temp = document.getElementById("temp"),
     hourlyBtn = document.querySelector(".hourly"),
     weekBtn = document.querySelector(".week"),
     celciusBtn = document.querySelector(".celcius"),
-    farenheitBtn = document.querySelector(".farenheit"),
-    tempUnit = document.querySelectorAll(".temo-unit")
+    fahrenheitBtn = document.querySelector(".fahrenheit"),
+    tempUnit = document.querySelectorAll(".temp-unit")
 
 
 let currentCity ="";
@@ -109,12 +109,18 @@ function getWeatherData (city, unit, hourlyOrWeek){
             mainIcon.src = getIcon(today.icon)
             sunRise.innerText = convertTimeTo12HourFormat(today.sunrise)
             sunSet.innerText = convertTimeTo12HourFormat(today.sunset)
+
+            // mainIcon.src = getIcon(today.icon)
+            // changeBackground(today.icon)
             if (hourlyOrWeek === "hourly"){
                 updateForecast(data.days[0].hours, unit , "day")
             } else {
                 updateForecast(data.days, unit , "week")
             }
-        });
+        })
+        .catch(err =>{
+            alert("City not found or don't exist.   ")
+        })
 }
 
 //funct to convert celcius to fahrenheit
@@ -201,17 +207,17 @@ function convertTimeTo12HourFormat(time){
 //functon to show the condition as image
 function getIcon(condition){
     if(condition === "Partly-cloudy"){
-        return "./partly-cloudy.png"
+        return "./img/partly-cloudy.png"
     } else if (condition === "partly-cloudy-night"){
-        return"partly-cloudy-night.png"
+        return"./img/partly-cloudy-night.png"
     } else if (condition === "rain"){
-        return"rain.png"
+        return"./img/rain.png"
     } else if (condition === "clear-day"){
-        return"sun.png"
+        return"./img/sun.png"
     } else if (condition === "clear-night"){
-        return"clear-night.png"
+        return"./img/clear-night.png"
     } else {
-        return"sun.png"
+        return"./img/sun.png"
     }
 }
 //
@@ -226,7 +232,7 @@ function getDayName(date) {
 function getHour(time){
     let hour = time.split(":")[0]
     let min = time.split(":")[1]
-    if(hour < 12) {
+    if(hour > 12) {
         hour = hour - 12;
         return `${hour}:${min} PM`
     }else {
@@ -286,11 +292,11 @@ function changeUnit(unit){
             elem.innerText = `°${unit.toUpperCase()}`
         }) 
         if(unit === "c"){
-            farenheitBtn.classList.remove("active")
             celciusBtn.classList.add("active")
+            fahrenheitBtn.classList.remove("active")
         } else {
             celciusBtn.classList.remove("active")
-            farenheitBtn.classList.add("active")
+            fahrenheitBtn.classList.add("active")
         }
         //call get weather after change unit
         getWeatherData(currentCity, currentUnit, hourlyOrWeek)
@@ -298,11 +304,27 @@ function changeUnit(unit){
     }
 }
 //
+// function changeBackground(condition){
+//     if(condition === "Partly-cloudy"){
+//         return "./partly-cloudy.png"
+//     } else if (condition === "partly-cloudy-night"){
+//         return"partly-cloudy-night.png"
+//     } else if (condition === "rain"){
+//         return"rain.png"
+//     } else if (condition === "clear-day"){
+//         return"sun.png"
+//     } else if (condition === "clear-night"){
+//         return"clear-night.png"
+//     } else {
+//         return"sun.png"
+//     }
+// }
+//
 celciusBtn.addEventListener("click", () =>{
-    changeUnit("f")
-})
-farenheitBtn.addEventListener("click", () =>{
     changeUnit("c")
+})
+fahrenheitBtn.addEventListener("click", () =>{
+    changeUnit("f")
 })
 //
 function changeTimeSpan(unit){
@@ -326,3 +348,4 @@ hourlyBtn.addEventListener("click", () =>{
 weekBtn.addEventListener("click", () =>{
     changeTimeSpan("week")
 })
+
